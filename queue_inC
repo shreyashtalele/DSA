@@ -1,0 +1,91 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct queue
+{
+    int size;
+    int r;
+    int f;
+    int *arr;
+};
+int isempty(struct queue *q)
+{
+    if (q->f == q->r)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int isfull(struct queue *q)
+{
+    if (q->r == q->size - 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+void insert(struct queue *q, int val)
+{
+    if (isfull(q))
+    {
+        printf("queue is full");
+    }
+    else
+    {
+        q->r = q->r + 1;
+        q->arr[q->r] = val;
+        printf("%d inserted \n ", val);
+    }
+}
+
+int delete (struct queue *q)
+{
+    int a = -1;
+    if (isempty(q))
+    {
+        printf("queue is empty");
+    }
+    else
+    {
+        q->f++;
+        a = q->arr[q->f];
+        printf("%d deleted \n", a);
+        return a;
+    }
+}
+void display(struct queue *q)
+{
+    if (isempty(q))
+    {
+        printf("queue is empty");
+    }
+    else
+    {
+        for (int i = q->f; i <= q->r; i++)
+        {
+            printf("%d ", q->arr[i]);
+            printf("\n");
+        }
+    }
+}
+int main()
+{
+    struct queue q;
+    q.size = 5;
+    q.f = q.r = -1;
+    q.arr = (int *)malloc(q.size * (sizeof(int)));
+    printf("queue is created  \n");
+    printf("%d \n", (isempty(&q)));
+    insert(&q, 51);
+    insert(&q, 52);
+    insert(&q, 53);
+    insert(&q, 54);
+    insert(&q, 55);
+    delete (&q);
+    display(&q);
+}
