@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+    int data;
+    struct node *next;
+};
+
+struct node *insert(struct node *head, int data)
+{
+    struct node *ptr = (struct node *)malloc(sizeof(struct node));
+    ptr->data = data;
+    ptr->next = head;
+
+    return ptr;
+}
+void find(struct node *head, int i)
+{
+    struct node *temp = head;
+    while (temp != NULL)
+    {
+        if (temp->data = i)
+        {
+            printf("element found", temp->data);
+            return;
+        }
+        else
+        {
+            temp = temp->next;
+        }
+    }
+    printf("element not found ");
+}
+void print(struct node *ptr)
+{
+    printf("elements in  a linked list \n");
+    while (ptr != NULL)
+    {
+        printf("%d \n ", ptr->data);
+        ptr = ptr->next;
+    }
+}
+
+int main()
+{
+    struct node *head;
+    struct node *second;
+    struct node *third;
+    struct node *fourth;
+
+    head = (struct node *)malloc(sizeof(struct node));
+    second = (struct node *)malloc(sizeof(struct node));
+    third = (struct node *)malloc(sizeof(struct node));
+    fourth = (struct node *)malloc(sizeof(struct node));
+
+    head->data = 10;
+    head->next = second;
+
+    second->data = 20;
+    second->next = third;
+
+    third->data = 30;
+    third->next = fourth;
+
+    fourth->data = 40;
+    fourth->next = NULL;
+
+    printf("linked list implemented \n  ");
+    head = insert(head, 15);
+    print(head);
+    find(head, 20);
+}
