@@ -1,0 +1,94 @@
+#include <stdio.h>
+#include <stdlib.h>
+struct stack
+{
+    int size;
+    int top;
+    char *arr;
+};
+int isempty(struct stack *sp)
+{
+    if (sp->top == -1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int isfull(struct stack *sp)
+{
+    if (sp->top == sp->size - 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+void push(struct stack *sp, char val)
+{
+    if (isfull(sp))
+    {
+        printf("stack overflow ");
+    }
+    else
+    {
+        sp->top++;
+        sp->arr[sp->top] = val;
+        printf("%c is inserted \n ", val);
+    }
+}
+int pop(struct stack *sp)
+{
+    if (isempty(sp))
+    {
+        printf("stack underflow");
+    }
+    else
+    {
+        char a;
+        a = sp->arr[sp->top];
+        sp->top--;
+        printf("%c poped \n ", a);
+    }
+}
+void display(struct stack *sp)
+{
+    if (isempty(sp))
+    {
+        printf("stack is empty");
+    }
+    else
+    {
+        for (int i = sp->top; i >= 0; i--)
+        {
+            printf("%c", sp->arr[sp->top]);
+            sp->top--;
+            printf("\n");
+        }
+    }
+}
+int main()
+{
+    struct stack *sp;
+    sp = (struct stack *)malloc(sizeof(struct stack));
+    sp->size = 10;
+    sp->top = -1;
+    sp->arr = (char *)malloc(sp->size * sizeof(char));
+    printf("stack implemented \n ");
+    printf("%d \n ", isempty(sp));
+    printf("%d \n", isfull(sp));
+    push(sp, 's');
+    push(sp, 'h');
+    push(sp, 'r');
+    push(sp, 'e');
+    push(sp, 'y');
+    push(sp, 'a');
+    pop(sp);
+    pop(sp);
+    display(sp);
+    return 0;
+}
