@@ -1,104 +1,113 @@
-#include<stdio.h>
-#include<stdlib.h>
-struct stack{
-    int size ;
+#include <stdio.h>
+#include <stdlib.h>
+struct stack
+{
+    int size;
     int top;
-    int * arr;
+    int *arr;
 };
- int isempty(struct stack *ptr)
- {
-     if(ptr->top==-1)
-     {
-          printf("the stack is empty");
-         return 1;
-     }
-     else
-     {
-         return 0;
-     }
- }
- int isfull(struct stack *ptr)
- {
-     if(ptr->top==ptr->size-1)
-     {
-         return 1;
-
-     }
-     else
-     {
-         return 0;
-     }
- }
- int push(int val ,struct stack* ptr)
- {
-    if(isfull(ptr))
+int isempty(struct stack *ptr)
+{
+    if (ptr->top == -1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int isfull(struct stack *ptr)
+{
+    if (ptr->top == ptr->size - 1)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}
+int push(struct stack *ptr, int val)
+{
+    if (isfull(ptr))
     {
         printf("stack overflow");
     }
-    else{
+    else
+    {
         ptr->top++;
-        ptr->arr[ptr->top]=val;
+        ptr->arr[ptr->top] = val;
         return val;
     }
- }
-  int pop(struct stack *ptr)
-  {
-     if(isempty(ptr))
-     {
-         printf("stack is underflow \n");
-     }
-     else{
-         int val;
-         val = ptr->arr[ptr->top];
-         ptr->top--;
-         return val;
-     }
-  }
-  int peep(struct stack *ptr)
-  {
-      if(isempty(ptr))
-      {
-          printf("the stack is empty");
-          return 0;
-      }
-      else
-      {
-          int val;
-          val=ptr->arr[ptr->top];
-          return val ;
-      }
-  }
-  void display(struct stack *ptr)
-  {
-      if(isempty(ptr))
-      {
-          printf("cannot print \n stack is empty");
-      }
-      else
-      {
-        printf("the stack elements are\n ");
-          for(int i =ptr->top ; i>=0; i--)
-          {
-              printf("%d \n",ptr->arr[ptr->top]);
-              ptr->top--;
-          }
-      }
-  }
+}
+int pop(struct stack *ptr)
+{
+    int a;
+    if (isempty(ptr))
+    {
+        printf("stack underflow ");
+    }
+    else
+    {
+        a = ptr->arr[ptr->top];
+        ptr->top--;
+        return a;
+    }
+}
+void peep(struct stack *ptr)
+{
+    if (isempty(ptr))
+    {
+        printf("stack is empty");
+    }
+    else
+    {
+        int b;
+        b = ptr->arr[ptr->top];
+        printf("top element is %d \n", b);
+    }
+}
+void display(struct stack *ptr)
+{
+    if (isempty(ptr))
+    {
+        printf(" stack is empty");
+    }
+    else
+    {
+        printf("the stack elements are \n");
+        for (int i = ptr->top; i >= 0; i--)
+        {
+            printf("%d \n ", ptr->arr[ptr->top]);
+            ptr->top--;
+        }
+    }
+}
+
 int main()
 {
     struct stack *sp;
-    sp =(struct stack *)malloc (sizeof(struct stack));
-    sp->size = 8;
+    sp = (struct stack *)malloc(sizeof(struct stack));
     sp->top = -1;
-    sp->arr=(int *)malloc(sp->size * sizeof(int));
-    printf("the stack is implemnted\n ");
-    printf("pushed %d in a stack\n", push(45,sp));
-     printf("pushed %d in a stack\n", push(55,sp));
-      printf("pushed %d in a stack\n", push(65,sp));
-       printf("pushed %d in a stack\n", push(75,sp));
-      // printf("poped %d from stack\n ", pop(sp));
-    //isempty(sp);
-     //printf("the topmost element is %d",peep(sp));
+    sp->size = 5;
+    sp->arr = (int *)malloc(sp->size * sizeof(int));
+    printf("%d \n", isempty(sp));
+
+    printf("%d \n", isfull(sp));
+
+    printf("pushed %d \n ", push(sp, 15));
+
+    printf("pushed %d \n ", push(sp, 76));
+
+    printf("pushed %d \n ", push(sp, 87));
+
+    printf("pushed %d \n ", push(sp, 25));
+
+    printf("pushed %d \n ", push(sp, 45));
+
+    peep(sp);
+    printf("poped %d \n ", pop(sp));
+    peep(sp);
     display(sp);
-    return 0;
 }
